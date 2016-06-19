@@ -1,0 +1,17 @@
+{
+  "name": "ai_contester_compilation_server",
+  "version": "1.0.0",
+  "description": "Compilation server for AI Contester.",
+  "main": "index.js",
+  "author": "Baydin (2DKot)",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "connect": "^3.4.1",
+    "temp": "^0.8.3"
+  },
+  "devDependencies": {
+    "errorhandler": "^1.4.3"
+  }
+}

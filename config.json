@@ -1,3 +1,6 @@
 {
-    "port": 3200
+    "port": "3200",
+    "java": {
+        "template": "../Strategy-templates/java/strategy/src/main/java/"
+    }
 }

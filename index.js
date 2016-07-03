@@ -19,7 +19,8 @@ console.log('compilation-server running on port ' + config.port);
 var temp = require('temp'),
     fs = require('fs'),
     cp = require('child_process'),
-    os = require('os');
+    os = require('os'),
+    path = require('path');
 
 function onerror(err, req, res, next) {
     console.log(err);
@@ -36,10 +37,14 @@ function compile(req, res) {
     console.log('files:')
     console.log(fs.readdirSync(tDir));
     //HACK!!!
-    config = {jdk: {binPath: "\""}};
-    var command = config.jdk.binPath + 
+    var binPath = "\"";
+    var template_path = config.java.template;
+    if(!path.isAbsolute(template_path)) {
+        template_path = process.cwd() + '/' + template_path;
+    }
+    var command = binPath + 
         "javac\" -encoding utf8 -implicit:none " + 
-        "-sourcepath " + process.cwd() + "/templates/java" + 
+        "-sourcepath " + template_path + 
         " MyStrategy.java";
     if(os.type() == 'Windows_NT') {
         command = "chcp 65001 | " + command;

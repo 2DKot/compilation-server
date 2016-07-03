@@ -1,6 +1,7 @@
 var connect = require('connect');
 var http = require('http');
 var bodyParser = require('body-parser');
+var config = require('./config.json');
  
 var app = connect().
             use(bodyParser.json()).
@@ -12,7 +13,8 @@ if (process.env.NODE_ENV === 'development') {
     app.use(errorHandler())
 };
 
-http.createServer(app).listen(3200);
+http.createServer(app).listen(config.port);
+console.log('compilation-server running on port ' + config.port);
 
 var temp = require('temp'),
     fs = require('fs'),
@@ -56,7 +58,7 @@ function compile(req, res) {
             response.errorMessage = mess;
         } else {
             response.status = "accepted";
-            response.class = fs.readFileSync(classPath);
+            response.executable = fs.readFileSync(classPath);
         }
         
         res.writeHead(200, { 'Content-Type': 'application/json' });
